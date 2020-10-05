@@ -8,6 +8,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+/** Criar Tabela **/
 @Entity
 @Table (name ="Tema" )
 public class Tema {
