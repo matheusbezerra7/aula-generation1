@@ -10,18 +10,19 @@ CREATE TABLE `tb_tema` (
 	`id` INT(200) NOT NULL AUTO_INCREMENT,
 	`Tema` varchar(200) NOT NULL,
 	`Categoria` varchar(200) NOT NULL,
-	`Local` varchar(2) NOT NULL,
+	`Estado` varchar(2) NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `tb_postagem` (
 	`id` INT(200) NOT NULL AUTO_INCREMENT,
-	`Postagem` varchar(255) NOT NULL,
+	`Postagem` varchar(500) NOT NULL,
 	`Data` DATETIME NOT NULL,
 	`Curtida` INT NOT NULL,
 	`Imagem` varchar(255) NOT NULL,
 	`tema_id` INT(255) NOT NULL,
 	`usuario_id` INT(255) NOT NULL,
+	`linkExterno` varchar NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
