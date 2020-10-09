@@ -10,13 +10,13 @@ import javax.validation.constraints.Size;
 
 /** Criar Tabela **/
 @Entity
-@Table (name ="Tema" )
+@Table (name ="tb_tema" )
 public class Tema {
 
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Size(max = 200)
+	
 	private long id;
 	
 	@NotNull
