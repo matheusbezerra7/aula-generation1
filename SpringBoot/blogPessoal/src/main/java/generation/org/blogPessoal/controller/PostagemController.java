@@ -1,9 +1,7 @@
-package org.generation.blogPessoal.controller;
+package generation.org.blogPessoal.controller;
 
 import java.util.List;
 
-import org.generation.blogPessoal.model.Postagem;
-import org.generation.blogPessoal.repository.PostagemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,52 +15,46 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import generation.org.blogPessoal.model.Postagem;
+import generation.org.blogPessoal.repository.PostagemRepository;
+
 @RestController
 @RequestMapping("/postagens")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PostagemController {
-
+	
 	@Autowired
 	private PostagemRepository repositoty;
 	
 	@GetMapping
 	public ResponseEntity<List<Postagem>> GetAll(){
 		return ResponseEntity.ok(repositoty.findAll());
-		
-	}
-	
-	
-	/*Passar pela url um id para buscar uma postagem especifica*/
-	@GetMapping("/{id}")
-	public ResponseEntity<Postagem> GetById(@PathVariable long id){
-		
-		return repositoty.findById(id)
-				.map(resp -> ResponseEntity.ok(resp)).orElse(ResponseEntity.notFound().build());
-		}
-	/*Buscar por titulo*/
-	@GetMapping("/titulo/{titulo}")
-	public ResponseEntity<List<Postagem>> GetByTitulo (@PathVariable String titulo){
-		return ResponseEntity.ok(repositoty.findAllByTituloContainingIgnoreCase(titulo));
 	}
 
-	/*Metodo post para criar novo dado na tabela*/
+	@GetMapping("/{id}")
+	public ResponseEntity<Postagem> GetById(@PathVariable long id){
+		return repositoty.findById(id)
+				.map(resp -> ResponseEntity.ok(resp))
+				.orElse(ResponseEntity.notFound().build());
+	}
+	
+	@GetMapping("/titulo/{titulo}")
+	public ResponseEntity<List<Postagem>> GetByTitulo(@PathVariable String titulo){
+		return ResponseEntity.ok(repositoty.findAllByTituloContainingIgnoreCase(titulo));
+	}
+	
 	@PostMapping
 	public ResponseEntity<Postagem> post (@RequestBody Postagem postagem){
-			return ResponseEntity.status(HttpStatus.CREATED).body(repositoty.save(postagem));
+		return ResponseEntity.status(HttpStatus.CREATED).body(repositoty.save(postagem));
 	}
 	
-	/*Atulizar dado*/
 	@PutMapping
 	public ResponseEntity<Postagem> put (@RequestBody Postagem postagem){
-			return ResponseEntity.status(HttpStatus.OK).body(repositoty.save(postagem));
+		return ResponseEntity.status(HttpStatus.OK).body(repositoty.save(postagem));
 	}
 	
-	/*deletar dado pelo id*/
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable long id) {
 		repositoty.deleteById(id);
-	}
-	
-	
-	
+	}	
 }
