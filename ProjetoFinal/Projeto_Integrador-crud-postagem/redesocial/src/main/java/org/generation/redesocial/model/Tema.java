@@ -14,66 +14,77 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-/** Criar Tabela **/
 @Entity
-@Table (name ="tb_tema" )
+@Table(name="tb_tema")
 public class Tema {
 
-	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private long id;
 	
 	@NotNull
-	@Size(min = 10 , max = 200)
+	@Size(min= 10, max= 200)
 	private String tema;
 	
 	@NotNull
-	@Size(min = 10 , max = 200)
+	@Size(min= 10, max= 200)
 	private String categoria;
 	
+	
 	@NotNull
-	@Size(min = 1 , max = 2)
+	@Size(min= 2, max= 2)
 	private String estado;
-
+	
 	@OneToMany(mappedBy = "tema", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("tema")
 	private List<Postagem> postagem;
 	
-	
+	//Getters and Setters
 	public long getId() {
 		return id;
 	}
+
 
 	public void setId(long id) {
 		this.id = id;
 	}
 
+
 	public String getTema() {
 		return tema;
 	}
+
 
 	public void setTema(String tema) {
 		this.tema = tema;
 	}
 
+
 	public String getCategoria() {
 		return categoria;
 	}
+
 
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
 
+
 	public String getEstado() {
 		return estado;
 	}
+
 
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 
+	public List<Postagem> getPostagem() {
+		return postagem;
+	}
+
+
+	public void setPostagem(List<Postagem> postagem) {
+		this.postagem = postagem;
+	}
 }
-
-
